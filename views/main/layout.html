@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>王栋个人博客</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="/public/css/base.css" rel="stylesheet">
+    <link href="/public/css/index.css" rel="stylesheet">
+    <link href="/public/css/m.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="/public/js/modernizr.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/public/js/jquery.js"></script>
+    <script type="text/javascript" src="/public/js/index.js"></script>
+</head>
+<body>
+<script>
+    window.onload = function ()
+    {
+        var oH2 = document.getElementsByTagName("h2")[0];
+        var oUl = document.getElementsByTagName("ul")[0];
+        oH2.onclick = function ()
+        {
+            var style = oUl.style;
+            style.display = style.display == "block" ? "none" : "block";
+            oH2.className = style.display == "block" ? "open" : ""
+        }
+    }
+</script>
+<div id="wrapper">
+    <header>
+        <div class="headtop"></div>
+        <div class="contenttop">
+            <div class="logo f_l">王栋博客</div>
+            <div class="blank"></div>
+            <div id="mnav">
+                <h2><span class="navicon"></span></h2>
+                <ul>
+                    <li><a href="/">首页</a></li>
+                    {% for category in categories %}
+                    <li><a href="/?category={{category.id}}">{{category.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <nav>
+                <div  class="navigation">
+                    <ul class="menu">
+                        <li><a href="/">首页</a></li>
+                        {% for category in categories %}
+                        <li><a href="/?category={{category.id}}">{{category.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </nav>
+            <SCRIPT type=text/javascript>
+                // Navigation Menu
+                $(function() {
+                    $(".menu ul").css({display: "none"}); // Opera Fix
+                    $(".menu li").hover(function(){
+                        $(this).find('ul:first').css({visibility: "visible",display: "none"}).slideDown("normal");
+                    },function(){
+                        $(this).find('ul:first').css({visibility: "hidden"});
+                    });
+                });
+            </SCRIPT>
+        </div>
+    </header>
+    <div class="jztop"></div>
+    <div class="container">
+        <div class="bloglist f_l">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="r_box f_r">
+            {% if userInfor._id %}
+            <div class="tuwen" id="userInfo">
+                <h3 class="tit">用户信息</h3>
+                <ul>
+                    <li>
+                        <p>{{userInfor.username}}</p>
+                    </li>
+                    <li >
+                        {% if userInfor.isAdmin %}
+                        <p>您好,管理员！<a href="/admin">点击进入后台管理</a></p>
+                        {% else %}
+                        <p>您好,欢迎光临我的博客！</p>
+                        {% endif %}
+
+                    </li>
+                    <li>
+                        <p><a href="javacript:void(0);" id="loginOut">退出</a></p>
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="tuwen"  id="login">
+                <h3 class="tit">登录</h3>
+                <ul>
+                    <li>
+                        <span>用户名：</span><input name="username" type="text">
+                    </li>
+                    <li>
+                        <span>密码：</span><input name="password" type="password">
+                    </li>
+                    <li>
+                        <button>登录</button>
+                    </li>
+                    <li>
+                        <p>还没注册？<a href="javacript:void(0);">马上注册</a></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tuwen none"  id="register">
+                <h3 class="tit">注册</h3>
+                <ul>
+                    <li>
+                        <span>用户名：</span><input name="username" type="text">
+                    </li>
+                    <li>
+                        <span>密码：</span><input name="password" type="password">
+                    </li>
+                    <li>
+                        <span>确认密码：</span><input name="repassword" type="password">
+                    </li>
+                    <li>
+                        <button>注册</button>
+                    </li>
+                    <li>
+                        <p>已有账号？<a href="javacript:void(0);">马上登录</a></p>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+            <div class="ad"> <img src="/public/images/03.jpg"> </div>
+        </div>
+    </div>
+    <!-- container代码 结束 -->
+    <div class="jzend"></div>
+    <footer>
+        <div class="footer">
+            <div class="f_l">
+                <p>All Rights Reserved 版权所有：<a href="/">王栋个人博客</a> 备案号：蜀ICP备00000000号</p>
+            </div>
+            <div class="f_r textr">
+                <p>Design by DanceSmile</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

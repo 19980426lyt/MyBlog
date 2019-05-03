@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<ul>
+    {% for content in contents %}
+    <li>
+        <h3 class="blogtitle">
+            <span>
+                <a href="/" title="css3" target="_blank" class="classname">作者：{{content.user.username}}</a>
+            </span>
+            <a href="/jstt/css3/2018-03-26/812.html" target="_blank">{{content.title}}</a>
+        </h3>
+        <div class="bloginfo">
+            <p>{{content.description}}</p>
+        </div>
+        <div class="autor">
+            <span class="lm f_l"></span>
+            <span class="dtime f_l">{{content.addTime|date('Y年m月d日 H:i:s',-8*60)}}</span>
+            <span class="viewnum f_l">浏览（<a href="/">{{content.views}}</a>）</span>
+            <span class="f_r">
+                <a href="/view?contentid={{content.id}}" class="more">阅读原文&gt;&gt;</a>
+            </span>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<div>
+    {% if page <=1 %}
+    <span>没有上一页</span>
+    {% else %}
+    <a href="/?category={{category}}&page={{page-1}}">上一页</a>
+    {% endif %}
+    {% if pages > 0 %}
+    <span>{{page}}/{{pages}}</span>
+    {% endif %}
+    {% if page >= pages %}
+    <span>没有下一页</span>
+    {% else %}
+    <a href="/?category={{category}}&page={{page+1}}">下一页</a>
+    {% endif %}
+</div>
+{% endblock %}
